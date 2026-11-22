@@ -11,9 +11,7 @@ exit /b %BAMBU_DIAG_RC%
 
 # INICIO_POWERSHELL_DIAGNOSTICO_BAMBU
 $ErrorActionPreference='Stop'
-$hashP1='D2A65F6E9FD1280C96E1B874641E8829CEE28D62EA6F6ED79380'
 $hashP3='201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF'
-# O hash P1 da linha acima sera validado contra o valor confirmado abaixo.
 $hashP1='D2A65F6E9FD1280C96E1B874641E8829CEE28D62EA7D7E87CCEFDA6F6ED79380'
 
 function Say([string]$value,[string]$color='Gray'){Write-Host $value -ForegroundColor $color}

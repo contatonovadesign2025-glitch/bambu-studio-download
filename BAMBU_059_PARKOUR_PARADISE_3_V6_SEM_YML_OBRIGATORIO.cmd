@@ -18,7 +18,7 @@ $server=Join-Path $env:APPDATA 'BAMBU Estudio Launcher Teste\mapas\parkour-parad
 $runtimeJar=Join-Path $server 'plugins\custom-parkour-tiktok.jar'
 $runtimeYml=Join-Path $server 'plugins\TParkourParadise\checkpoints.yml'
 function Info([string]$s,[string]$c='Gray'){Write-Host $s -ForegroundColor $c}
-function H([string]$p){
+function HashArquivoV6([string]$p){
  if(-not(Test-Path -LiteralPath $p -PathType Leaf)){return 'AUSENTE'}
  return (Get-FileHash -LiteralPath $p -Algorithm SHA256 -ErrorAction Stop).Hash
 }
@@ -83,16 +83,16 @@ function Bkp([string]$p,[string]$dir,[System.Collections.Generic.List[object]]$r
  $was=Test-Path -LiteralPath $p -PathType Leaf
  $back='';$h=''
  if($was){
-  $h=H $p
+  $h=HashArquivoV6 $p
   $back=Join-Path $dir (('{0:D2}' -f ($records.Count+1))+'_'+[IO.Path]::GetFileName($p)+'.bak')
   Copy-Item -LiteralPath $p -Destination $back -ErrorAction Stop
-  if((H $back) -ne $h){throw 'Backup falhou: '+$p}
+  if((HashArquivoV6 $back) -ne $h){throw 'Backup falhou: '+$p}
  }
  [void]$records.Add([pscustomobject]@{path=$p;was=$was;backup=$back;hash=$h})
 }
 function Revert([object[]]$records){
  foreach($r in $records){
-  if($r.was -and ((-not(Test-Path -LiteralPath $r.backup -PathType Leaf)) -or ((H $r.backup) -ne $r.hash))){
+  if($r.was -and ((-not(Test-Path -LiteralPath $r.backup -PathType Leaf)) -or ((HashArquivoV6 $r.backup) -ne $r.hash))){
    throw ('Backup ausente ou corrompido: '+$r.backup)
   }
  }
@@ -111,8 +111,8 @@ function RunInstall{
  if(-not(Test-Path -LiteralPath (Join-Path $server 'plugins') -PathType Container)){
   throw 'Servidor BAMBU P3 nao preparado. Abra uma vez e feche, sem aplicar outros patches.'
  }
- $p3hash=H $src.jar
- $p1hash=H $src.p1
+ $p3hash=HashArquivoV6 $src.jar
+ $p1hash=HashArquivoV6 $src.p1
  Info ''
  Info ('PLUGIN GULIVE PARADISE 3: '+$src.jar) 'Cyan'
  Info ('SHA256 P3: '+$p3hash)
@@ -213,8 +213,8 @@ function RunInstall{
    if(-not(Test-Path -LiteralPath $p -PathType Container)){New-Item -ItemType Directory -Path $p -Force | Out-Null}
    Copy-Item -LiteralPath $src.checkpoints -Destination $runtimeYml -Force -ErrorAction Stop
   }
-  if((H $ownJar) -ne $p3hash -or (H $oldAsset) -ne $p3hash -or (H $runtimeJar) -ne $p3hash){throw 'Hash do plugin nao confere depois da copia.'}
-  if($src.checkpoints -and ((H $ownYml) -ne (H $src.checkpoints) -or (H $runtimeYml) -ne (H $src.checkpoints))){throw 'Hash dos checkpoints nao confere.'}
+  if((HashArquivoV6 $ownJar) -ne $p3hash -or (HashArquivoV6 $oldAsset) -ne $p3hash -or (HashArquivoV6 $runtimeJar) -ne $p3hash){throw 'Hash do plugin nao confere depois da copia.'}
+  if($src.checkpoints -and ((HashArquivoV6 $ownYml) -ne (HashArquivoV6 $src.checkpoints) -or (HashArquivoV6 $runtimeYml) -ne (HashArquivoV6 $src.checkpoints))){throw 'Hash dos checkpoints nao confere.'}
   Info ''
   Info '[OK] PLUGIN PARADISE 3 INSTALADO NO MOTOR E NO SERVIDOR.' 'Green'
   Info '[OK] Copia independente protegida e gancho ligado ao motor.' 'Green'
@@ -231,12 +231,12 @@ function RunInstall{
 function Compare {
  $src=FindGulive
  if(-not $src){throw 'Plugin GULIVE P3 nao encontrado.'}
- Info ('GULIVE P3: '+(H $src.jar)) 'Cyan'
- Info ('GULIVE P1: '+(H $src.p1)) 'Cyan'
- Info ('BAMBU SERVIDOR: '+(H $runtimeJar)) 'Cyan'
+ Info ('GULIVE P3: '+(HashArquivoV6 $src.jar)) 'Cyan'
+ Info ('GULIVE P1: '+(HashArquivoV6 $src.p1)) 'Cyan'
+ Info ('BAMBU SERVIDOR: '+(HashArquivoV6 $runtimeJar)) 'Cyan'
  if($src.checkpoints){
-  Info ('GULIVE P3 checkpoints: '+(H $src.checkpoints))
-  Info ('BAMBU checkpoints: '+(H $runtimeYml))
+  Info ('GULIVE P3 checkpoints: '+(HashArquivoV6 $src.checkpoints))
+  Info ('BAMBU checkpoints: '+(HashArquivoV6 $runtimeYml))
  }else{Info 'GULIVE P3 nao possui checkpoints.yml no local previsto.' 'Yellow'}
 }
 function Restore{

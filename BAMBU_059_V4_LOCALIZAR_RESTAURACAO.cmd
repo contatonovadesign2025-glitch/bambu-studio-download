@@ -117,7 +117,7 @@ try{
     }
     L ''
     L 'FIM. Nenhum arquivo do jogo foi modificado.'
-    $encoding=New-Object System.Text.UTF8Encoding($true)
+    $encoding=[System.Text.UTF8Encoding]::new($true)
     [IO.File]::WriteAllLines($report,$lines.ToArray(),$encoding)
     Write-Host ''
     Write-Host ('RELATORIO CRIADO: '+$report) -ForegroundColor Green

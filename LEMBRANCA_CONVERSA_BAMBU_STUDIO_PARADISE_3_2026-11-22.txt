@@ -110,4 +110,35 @@ ESTADO ATUAL E PRÓXIMOS PASSOS
 COMUNICAÇÃO COM O USUÁRIO:
 Responder sempre em português brasileiro. Ser objetivo e assumir erros sem repetir desculpas. O usuário já gastou bastante tempo com gerações inconsistentes. Evitar pedir os mesmos arquivos de novo e evitar explicar o procedimento antigo como se fosse novidade. Ele prefere receber a pasta pronta e poder mandar instalador confiável para seus clientes.
 
+
+========================================================
+ADENDO EM 22/11/2026 — REPOSITÓRIO LIMPO E RELEASES REVISADAS
+========================================================
+
+REPOSITÓRIO: https://github.com/contatonovadesign2025-glitch/bambu-studio-download
+
+Em 22/11/2026, após revisar os scripts, foram REMOVIDOS DA BRANCH MAIN 12 arquivos antigos/experimentais/duplicados. Recuperáveis pelo histórico Git. Foram preservados:
+- README.md (índice, estado das versões e instruções de publicação)
+- BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd (correção com teste positivo)
+- BAMBU_STUDIO_059_GERAR_INSTALADOR_COM_ATALHO_V4.cmd (candidato, sem confirmação de instalação)
+- LEMBRANCA_CONVERSA_BAMBU_STUDIO_PARADISE_3_2026-11-22.txt (este registro)
+- RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md (documento novo para preparar release RC10)
+
+RELEASES REALMENTE PUBLICADAS, CONSULTADAS NO GITHUB:
+1) v3.0.3-3f159e15e445, nome 'BAMBU Cloud Studio 3.0.3':
+   asset Instalar-BAMBU-Cloud-3.0.3.exe, tamanho 83.962.219 bytes.
+   Link https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v3.0.3-3f159e15e445
+2) v2.0.0, nome 'BAMBU Studio 2.0':
+   asset Instalar-BAMBU-2.0.0.exe, tamanho 83.957.527 bytes.
+   Link https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v2.0.0
+
+PROBLEMA: NÃO há release de BAMBU STUDIO 0.5.9 RC10 Paradise 3, nem o instalador V4 anexado no GitHub. NÃO substituir o EXE da release Cloud 3.0.3, porque é produto/versão diferente. Para publicar corretamente, o usuário precisa GERAR e TESTAR o V4 no Windows; anexar o EXE real numa release SEPARADA, por exemplo tag v0.5.9-rc10-p3. Atualmente o arquivo V4 é esperado como:
+Instalar_BAMBU_STUDIO_059_PARKOUR_P3_V4_COM_ATALHO.exe
+
+O GitHub conectado disponível ao assistente permite ler releases mas NÃO oferece ação de criar/editar release ou de enviar arquivos binários para assets. Assim, documentação foi atualizada no repositório, mas nenhuma release foi editada e nenhum instalador foi anexado.
+
+README.md e RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md detalham status, teste pendente e checklist de publicação.
+
+Cloudflare D1/Workers e licenças continuam INALTERADOS; apenas os arquivos textuais do repositório foram modificados.
+
 FIM DA LEMBRANÇA.

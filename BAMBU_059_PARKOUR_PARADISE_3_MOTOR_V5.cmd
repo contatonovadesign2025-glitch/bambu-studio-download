@@ -203,7 +203,7 @@ function Install {
   }catch{
     Say ('[ERRO] '+$_.Exception.Message) 'Red'
     Say 'Tentando reverter arquivos ...' 'Yellow'
-    try{RevertEntries @($entries.ToArray())}catch{Say ('Falha na restauracao automatica: '+$_.Exception.Message) 'Red'}
+    try{RevertEntries -entries ($entries.ToArray())}catch{Say ('Falha na restauracao automatica: '+$_.Exception.Message) 'Red'}
     throw 'Instalacao interrompida.'
   }
 }
@@ -228,7 +228,7 @@ function Restore {
   Say ('Backup de: '+$m.when) 'Cyan'
   $yes=Read-Host 'BAMBU e servidor FECHADOS? Digite SIM para restaurar'
   if($yes -cne 'SIM'){Say 'Cancelado.';return}
-  RevertEntries @($m.entries)
+  RevertEntries -entries @($m.entries)
   Say '[OK] Arquivos anteriores restaurados.' 'Green'
 }
 try{

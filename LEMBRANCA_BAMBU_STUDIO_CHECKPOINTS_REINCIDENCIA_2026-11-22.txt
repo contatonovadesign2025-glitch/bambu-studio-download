@@ -1,0 +1,153 @@
+LEMBRANÇA DA CONVERSA — BAMBU STUDIO 0.5.9 / CHECKPOINTS PARKOUR PARADISE 3
+Atualização: 22/11/2026
+FINALIDADE: enviar este TXT a outra conversa para retomar a investigação no ponto exato, SEM REFAZER correções anteriores às cegas.
+
+============================================================
+1) PEDIDO ATUAL E SITUAÇÃO
+============================================================
+Usuário trabalha no BAMBU STUDIO 0.5.9, programa Windows/Electron para jogos interativos TikTok, com servidor de Minecraft e mapa Parkour Paradise 3.
+O usuário entregou instalador "Instalar-BAMBU-STUDIO-0.5.9-SEMIFINAL.exe" a um amigo.
+No PC do amigo, o Minecraft acusou os 7 checkpoints dentro de blocos. Depois o MESMO aviso reapareceu no PC do usuário, que ANTES funcionava.
+O usuário forneceu captura final mostrando que o erro CONTINUA após tentativa de copiar o plugin correto. NÃO foi confirmado o hash depois dessa tentativa nem depois de iniciar o servidor.
+O usuário pediu ESTE ARQUIVO DE LEMBRANÇA ANTES DE NOVA CORREÇÃO. NÃO aplicar modificações nesta etapa.
+
+MENSAGEM DE ERRO (capturas fornecidas):
+[Parkour] ATENÇÃO: este plugin (TParkourParadise) é do mapa
+"Parkour Paradise", mas 7 de 7 checkpoints caem DENTRO de
+blocos neste mundo. Você está usando o .jar do mapa errado?
+Deixe na pasta plugins só o plugin do mapa que está aberto.
+
+A captura mais recente foi enviada em 22/11/2026 e mostra exatamente este aviso vermelho persistente.
+
+============================================================
+2) DESCOBERTA CONFIRMADA POR POWERSHELL
+============================================================
+Foi executado no PC do usuário:
+
+$p = Join-Path $env:APPDATA 'BAMBU Estudio Launcher Teste\mapas\parkour-paradise-3\servidor-mine\servidor\plugins\custom-parkour-tiktok.jar'
+if (Test-Path $p) {
+    (Get-FileHash $p -Algorithm SHA256).Hash
+} else {
+    "PLUGIN NÃO ENCONTRADO: $p"
+}
+
+RESULTADO REAL enviado pelo usuário:
+D2A65F6E9FD1280C96E1B874641E8829CEE28D62EA7D7E87CCEFDA6F6ED79380
+
+Esse hash corresponde ao plugin historicamente identificado como PARADISE 1, não o plugin usado com sucesso na correção V6.1 do Paradise 3.
+
+Hash do plugin Paradise 3 previamente usado com êxito:
+201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF
+
+IMPORTANTE:
+- Confirmado: no MOMENTO DO COMANDO, o arquivo nesse caminho tinha hash do Paradise 1.
+- Não confirmado: se esse é o único plugin que o Java carrega; se ele foi substituído antes/depois da inicialização; se os checkpoints salvos são compatíveis com o mundo.
+- Não confirmado: o hash do MESMO arquivo após o procedimento manual de restauração e após abrir o BAMBU novamente.
+- A persistência do aviso sozinha NÃO confirma o mecanismo exato. Evitar afirmar que bastaria copiar JAR novamente.
+
+============================================================
+3) CORREÇÃO V6.1 QUE ANTES FUNCIONAVA
+============================================================
+Antes, usando a pasta:
+%USERPROFILE%\Downloads\BAMBU_STUDIO_059_RC10_GULIVE_MOTOR_CORRIGIDO\BAMBU_STUDIO_0_5_9_PORTATIL_INTERFACE_INTEGRADA\
+
+Aplicou-se a correção V6.1:
+https://github.com/contatonovadesign2025-glitch/bambu-studio-download/blob/main/BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd
+
+A V6.1 usava o JAR correto do GULIVE Paradise 3 originalmente em:
+%LOCALAPPDATA%\GULIVE-Local-1.25.1\servidor-mine\parkour-paradise-3\servidor\plugins\custom-parkour-tiktok.jar
+
+Ela criou/alterou no MOTOR antigo:
+resources\app\engine\bambu-paradise3-v6-source.jar
+resources\app\engine\bambu-paradise3-v6-hook.cjs
+resources\app\engine\servidor.cjs (marcador BAMBU-PARADISE3-V6)
+resources\app\engine\hud-layout-assets\custom-parkour-tiktok-hud-bambu.jar
+
+A função do hook era copiar a versão Paradise 3 para o servidor antes de iniciar Java.
+O servidor em APPDATA:
+%APPDATA%\BAMBU Estudio Launcher Teste\mapas\parkour-paradise-3\servidor-mine\servidor
+
+Quando o motor corrigido funcionou, o usuário enviou prints mostrando:
+- HUD nível/tempo no Minecraft;
+- /tparkour configurar com 3 perguntas SIM/NÃO;
+- ESCUDO LIGADO, TETO LIGADO, NÍVEL NEGATIVO DESLIGADO;
+- "Configuração salva!";
+- aviso dos 7 checkpoints não aparecia nas capturas.
+Porém nunca houve validação completa de todos os checkpoints.
+
+A V6.1 NÃO encontrou checkpoints.yml do GULIVE Paradise 3 nos locais esperados e NÃO inventou coordenadas.
+
+ATENÇÃO: o script V6.1 procura uma instalação local do GULIVE e motores em Downloads/Desktop. Não assumir que serve para um cliente que só instalou o NSIS; evitar distribuí-lo como solução universal.
+
+============================================================
+4) INSTALADOR/BASE ATUAL E RISCO DE REINSTALAÇÃO
+============================================================
+O usuário atualmente usa o pacote mais novo:
+"BAMBU_STUDIO_0_5_9_SEMIFINAL_GERADOR_GRATUITO_NSIS (2).zip"
+e o instalador gerado a partir dele:
+"Instalar-BAMBU-STUDIO-0.5.9-SEMIFINAL.exe"
+
+Há outro pacote produzido para retirar "SEMIFINAL" do nome:
+"BAMBU_STUDIO_0_5_9_GERADOR_NSIS_CORRIGIDO.zip"
+(NÃO presumir que já está instalado nos PCs ou que corrige o erro dos checkpoints.)
+
+É possível que o NSIS, recursos embutidos no Electron, preparação do servidor, plugin de runtime ou dados persistidos em APPDATA voltem a introduzir o JAR errado.
+Essa é uma HIPÓTESE e deve ser provada com comparação dos arquivos e hashes antes e depois de iniciar o servidor.
+O fato do usuário ter enviado um .lnk e um .exe não é confirmação de que o instalador foi auditado internamente.
+O Windows pode manter cópia do servidor em APPDATA entre instalações, e instalar o app novamente não necessariamente troca todos os arquivos persistentes.
+
+============================================================
+5) TENTATIVA IMEDIATAMENTE ANTERIOR AO PRINT MAIS RECENTE
+============================================================
+O assistente sugeriu, com BAMBU e servidor fechados:
+- localizar origem P3 válida em %LOCALAPPDATA%\GULIVE-Local-1.25.1\... ou no motor V6.1 antigo;
+- verificar hash P3 correto;
+- criar backup do JAR atual do servidor em APPDATA;
+- copiar o plugin correto P3 para plugins\custom-parkour-tiktok.jar;
+- verificar SHA-256 da cópia.
+
+Depois disso o usuário enviou captura mostrando: "ainda" e o mesmo aviso.
+NÃO há log no diálogo provando se o comando anterior concluiu com sucesso, qual hash imprimiu ao final, ou se o processo de início do Minecraft substituiu o JAR. Portanto não afirmar que a cópia correta foi estável.
+
+============================================================
+6) A INVESTIGAR ANTES DE OUTRA ALTERAÇÃO
+============================================================
+PRIMEIRO, diagnóstico SOMENTE LEITURA e com evidência do caminho real de execução:
+A) Verificar o caminho REAL do executável BAMBU instalado pelo NSIS e qual engine/servidor.cjs ele usa.
+B) Listar todos os custom-parkour-tiktok*.jar e outros plugins TParkourParadise no pacote instalado, resources\app\engine, templates/recursos e servidor APPDATA, com SHA-256.
+C) Verificar hash do JAR em APPDATA em 3 momentos: servidor fechado, após "Preparar e iniciar servidor", e após a mensagem vermelha. Guardar os resultados.
+D) Confirmar diretório de trabalho do Java, caminho real do server JAR e pasta plugins carregada (pode ser diferente do APPDATA testado).
+E) Verificar qual plugin do instalador está sendo usado para REPOR arquivos e se o hook V6.1 existe/funciona na base NSIS.
+F) Verificar eventuais duplicatas com plugin.yml equivalente no diretório plugins.
+G) Se o JAR correto realmente estiver carregado e o aviso continuar, investigar mundo, checkpoint config, coordenadas e caminho de mundo, SEM INVENTAR checkpoints.
+H) Comparar PC do usuário com instalação limpa no PC amigo, respeitando direitos e backups. Capturar hashes/estrutura, não senhas.
+I) Só depois modificar a FONTE do pacote e gerar instalador NSIS completo, de forma que funcione sem GULIVE no PC cliente. Validar do zero e após reiniciar.
+
+NÃO:
+- Não apagar mundos/progresso, configs RCON ou licenças.
+- Não substituir aleatoriamente todo o motor nem reaplicar scripts antigos sem saber a versão.
+- Não confundir ausência do aviso com checkpoints inteiramente corretos.
+- Não publicar nova versão aos clientes antes de teste em Windows limpo.
+- Não mexer no Cloudflare/D1 para corrigir problema local de plugin sem entender a relação.
+
+============================================================
+7) GITHUB, RELEASE E CLOUDFLARE
+============================================================
+Repositório conhecido:
+https://github.com/contatonovadesign2025-glitch/bambu-studio-download
+
+Histórico de releases no GitHub inclui BAMBU Cloud Studio 3.0.3 e BAMBU Studio 2.0, que não equivalem ao BAMBU STUDIO 0.5.9 atual.
+Usuário quer versão final chamada BAMBU STUDIO 0.5.9 (sem "SEMIFINAL"), gerador NSIS e instalador EXE distribuível que já contenha tudo que o cliente necessita.
+A publicação da release 0.5.9 com EXE validado e a atualização do link Cloudflare NÃO foram confirmadas nesta conversa.
+Não modificar Worker, D1, licenças ou dados existentes sem motivo e validação.
+
+============================================================
+8) COMO RESPONDER NA PRÓXIMA CONVERSA
+============================================================
+O objetivo é solucionar a recorrência do erro de checkpoints DEFINITIVAMENTE na versão NSIS e nos PCs dos clientes.
+Começar comparando os hashes e caminhos REAIS; não começar mandando usuário copiar o mesmo JAR pela terceira vez.
+Falar em português do Brasil, ser objetivo, não pedir arquivos que já estejam disponíveis e respeitar o pedido do usuário de gerar uma pasta ZIP completa com gerador de instalador DENTRO, no padrão antigo.
+Guardar backups e confirmar testes reais. Só afirmar "resolvido" quando servidor, checkpoints e instalação em PC novo funcionarem.
+Antes de qualquer nova correção, o usuário pediu este registro de lembrança; nenhuma correção deve ser aplicada como parte desta etapa.
+
+FIM DO REGISTRO.

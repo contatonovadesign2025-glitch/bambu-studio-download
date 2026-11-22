@@ -151,3 +151,15 @@ Guardar backups e confirmar testes reais. Só afirmar "resolvido" quando servido
 Antes de qualquer nova correção, o usuário pediu este registro de lembrança; nenhuma correção deve ser aplicada como parte desta etapa.
 
 FIM DO REGISTRO.
+
+
+============================================================
+ADENDO: CORREÇÃO V7 GERADA (AINDA NÃO TESTADA NO PC)
+============================================================
+Foi publicado um script de correção V7 que NÃO exige adivinhar checkpoints e tem as opções de diagnóstico somente leitura e aplicação com backup:
+https://github.com/contatonovadesign2025-glitch/bambu-studio-download/blob/main/BAMBU_059_CORRECAO_DEFINITIVA_PLUGIN_PARADISE_3_V7.cmd
+
+A V7 localiza motores BAMBU de recursos Electron, procura uma fonte de JAR Paradise 3 com SHA256 correto (GULIVE P3, V6.1 e arquivo ZIP antigo quando possível), substitui dentro de resources/app JARs cujo hash corresponda ao Paradise 1, guarda o JAR P3 no motor e inclui hook antes de iniciar Java. Também atualiza o runtime do servidor em APPDATA, quando existente. Todos os arquivos alterados são salvos previamente em backup.
+ESTADO: código publicado e revisado estaticamente; NENHUM TESTE REAL da V7 pelo usuário foi comunicado. Não afirmar que o problema foi resolvido antes do novo hash, teste de inicialização e comparação. O código executável da V7 não altera mundo/checkpoints/arquivos de licença.
+Se a V7 for aplicada na pasta de projeto NSIS, ainda é necessário gerar de novo o instalador a partir dela e validar em PC limpo; não colocar o arquivo CMD como se fosse instalador pronto.
+Se o aviso continuar com hash P3, investigar arquivos de checkpoints/mapa e Java cwd, em vez de repetir a cópia.

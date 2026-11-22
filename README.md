@@ -28,6 +28,14 @@ O instalador antigo `Instalar-BAMBU-STUDIO-0.5.9-SEMIFINAL.exe` **não foi renom
 
 **Atenção:** o arquivo `resources/app/cloud-client.cjs` ainda faz referência ao Worker `bambu-cloud-api-teste.brunoclash1100.workers.dev`. Antes da distribuição comercial, verificar se essa API é a correta para licenças reais. Não alterar licenças, dados ou D1 apenas para corrigir o instalador.
 
+## Correção de reincidência do plugin Paradise 3 (V7 — pendente de teste)
+
+Após o instalador NSIS 0.5.9, o usuário e um amigo voltaram a receber o aviso de 7/7 checkpoints dentro de blocos. O hash **medido no plugin runtime do usuário** era `D2A65F6E9FD1280C96E1B874641E8829CEE28D62EA7D7E87CCEFDA6F6ED79380` (Paradise 1), enquanto o hash esperado do Paradise 3 é `201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF`.
+
+- [BAMBU_059_CORRECAO_DEFINITIVA_PLUGIN_PARADISE_3_V7.cmd](BAMBU_059_CORRECAO_DEFINITIVA_PLUGIN_PARADISE_3_V7.cmd) — faz diagnóstico dos motores instalados ou extraídos, exige fonte P3 de hash confirmado, faz backup, corrige JARs antigos embutidos e protege runtime antes da inicialização Java.
+- A V7 **ainda não foi executada/testada pelo usuário**; não colocar como comprovadamente resolvida, nem enviar o CMD como instalador de cliente.
+- Depois de corrigir **a pasta-fonte NSIS**, é obrigatório **regenerar e testar o instalador completo** para novos computadores. Corrigir só APPDATA não resolve a distribuição.
+- Se o aviso continuar com o JAR P3 correto confirmado após abrir Java, investigar diretório real do servidor, mundo e coordenadas dos checkpoints.
 ## GitHub Releases
 
 As releases antigas apontam para instaladores de outras versões/produtos e **não devem ser usadas como versão 0.5.9**:

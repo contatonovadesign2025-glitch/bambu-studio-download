@@ -1,0 +1,113 @@
+LEMBRANÇA / CONTINUIDADE — BAMBU STUDIO 0.5.9 RC10 + GULIVE PARKOUR PARADISE 3
+Data de referência: 22/11/2026 (Brasil)
+Objetivo: colar este texto em uma NOVA conversa para retomar o projeto sem repetir explicações nem refazer correções já aprovadas.
+
+========================================================
+PEDIDO PRINCIPAL DO USUÁRIO — NÃO CONFUNDIR
+========================================================
+O usuário desenvolve o BAMBU STUDIO, aplicativo Windows/Electron para jogos interativos em lives TikTok, com servidor Minecraft Parkour.
+Ele deseja uma ENTREGA COMPLETA, como nas versões antigas: um único arquivo ZIP contendo a pasta do programa já pronta, executável, motor, servidor/mapa e GERADOR DE INSTALADOR dentro dessa pasta. Não quer receber somente um arquivo .cmd avulso, nem instruções sucessivas para remontar o programa. O instalador gerado para os CLIENTES deve ser um único .exe, fácil de enviar, com ícone no Desktop e no Menu Iniciar, sem exigir que o cliente encontre pastas em AppData.
+NUNCA mexer à toa no motor que já funcionou; preservar HUD, RCON, botão único "Preparar e iniciar servidor", integrações e funções previamente existentes. Fazer backup antes de qualquer modificação.
+Acompanhar a execução REAL antes de afirmar que a produção/instalação está aprovada. Não dizer que "já gerei" um ZIP anexado se o arquivo não existe.
+
+========================================================
+BASE QUE FUNCIONOU — FATO CONFIRMADO
+========================================================
+A versão funcional extraída do usuário foi a pasta:
+%USERPROFILE%\Downloads\BAMBU_STUDIO_059_RC10_GULIVE_MOTOR_CORRIGIDO\
+Dentro dela, aplicativo:
+BAMBU_STUDIO_0_5_9_PORTATIL_INTERFACE_INTEGRADA\
+Motor:
+resources\app\engine\
+O usuário enviou para a conversa a pasta correta compactada:
+BAMBU_STUDIO_059_RC10_GULIVE_MOTOR_CORRIGIDO (1).zip
+e um ZIP antigo SOMENTE COMO EXEMPLO DE FORMATO:
+BAMBU_STUDIO_TESTE_0_5_9_CORRECOES_PROGRESSO(1).zip
+Também enviou:
+BAMBU_STUDIO_0_5_9_PORTATIL_INTERFACE_INTEGRADA(1).zip
+Este último é a base original e NÃO é a base final corrigida.
+Os três uploads foram recebidos. Em tentativas posteriores, ferramentas do ambiente falharam ao abrir/recompactar ZIPs (ClientError); NÃO confundir falha de ferramenta com arquivo inválido nem pedir reenvio sem necessidade.
+
+========================================================
+PLUGIN GULIVE PARA PARKOUR PARADISE 3
+========================================================
+GULIVE v1.25.1 é o nome/versão do PROGRAMA; o MAPA correto é PARKOUR PARADISE 3 — NÃO Paradise 1.
+Plugin correto (origem GULIVE no Windows):
+%LOCALAPPDATA%\GULIVE-Local-1.25.1\servidor-mine\parkour-paradise-3\servidor\plugins\custom-parkour-tiktok.jar
+SHA256 plugin correto Paradise 3:
+201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF
+Plugin antigo Paradise 1, que NÃO deve ser usado no mapa 3:
+D2A65F6E9FD1280C96E1B874641E8829CEE28D62EA7D7E87CCEFDA6F6ED79380
+A correção V6.1 funcionou, com o usuário escolhendo o motor opção [2].
+Script V6.1:
+https://github.com/contatonovadesign2025-glitch/bambu-studio-download/blob/main/BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd
+
+No motor corrigido, V6.1 instalou:
+resources\app\engine\bambu-paradise3-v6-source.jar
+resources\app\engine\bambu-paradise3-v6-hook.cjs
+e alterou resources\app\engine\servidor.cjs com marcador BAMBU-PARADISE3-V6.
+O gancho copia o plugin correto imediatamente antes de iniciar Java, evitando substituição por plugin errado.
+O motor também contém hud-layout-assets\custom-parkour-tiktok-hud-bambu.jar.
+Destino do servidor do usuário:
+%APPDATA%\BAMBU Estudio Launcher Teste\mapas\parkour-paradise-3\servidor-mine\servidor\
+O arquivo plugins\TParkourParadise\checkpoints.yml do GULIVE Paradise 3 não foi localizado no caminho esperado; V6.1 deliberadamente NÃO inventou checkpoints nem apagou os existentes.
+
+RESULTADO REAL DOS TESTES:
+O usuário executou BAMBU, abriu servidor e Minecraft; screenshots mostraram as três perguntas SIM/NÃO de /tparkour configurar e confirmação "Configuração salva!".
+ESCUDO: LIGADO.
+TETO (TETO99): LIGADO.
+NÍVEL NEGATIVO: DESLIGADO.
+HUD de tempo e nível apareceu.
+O alerta vermelho anterior de "7 de 7 checkpoints caem dentro de blocos" não apareceu nos prints finais, mas isso NÃO prova que todos os checkpoints estejam corretos. Ainda faltam teste de progressão, 100 níveis, efeitos TikTok e uma partida completa.
+
+========================================================
+GERAÇÃO DO PACOTE E INSTALADOR — O QUE DEU CERTO E ERROS
+========================================================
+O gerador inicial usava .NET ZipFile.CreateFromDirectory e falhava ao compactar caminho muito longo em node_modules:
+...\tiktok-live-connector\node_modules\http2-wrapper\source\proxies\unexpected-status-code-error.js
+O V2 passou a montar pasta em Desktop e compactar com tar.exe (caminho relativo curto).
+O gerador V3 criou com êxito (log fornecido pelo usuário) estes itens:
+%USERPROFILE%\Desktop\BAMBU_FINAL_P3\                    (pasta completa)
+%USERPROFILE%\Desktop\BAMBU_STUDIO_0_5_9_RC10_PARKOUR_PARADISE_3_FINAL.zip
+%USERPROFILE%\Desktop\Instalar_BAMBU_STUDIO_059_PARKOUR_P3.exe
+O .exe V3 tinha cerca de 293,9 MB e embutia o ZIP.
+Link V3 (histórico):
+https://github.com/contatonovadesign2025-glitch/bambu-studio-download/blob/main/BAMBU_STUDIO_059_GERAR_INSTALADOR_COMPLETO_UM_CLIQUE_V3.cmd
+O arquivo estava em %USERPROFILE%\Desktop (desktop LOCAL), enquanto o Desktop visível do Windows aparentemente era redirecionado (possivelmente OneDrive); o usuário encontrou o arquivo.
+O usuário instalou V3, mas NÃO apareceu ícone na Área de Trabalho nem menu Iniciar. Causa confirmada no código: instalador apenas extraía para:
+%LOCALAPPDATA%\BAMBU_STUDIO_P3_FINAL\BAMBU_FINAL_P3\
+e oferecia abrir o CMD; NÃO criava atalhos. Usuário não aceita esse comportamento para clientes.
+
+Foi publicada V4 com instruções de criar atalho .lnk na Área de Trabalho REAL (Environment.SpecialFolder.DesktopDirectory) e no Menu Iniciar (Environment.SpecialFolder.Programs), usando WScript.Shell, ícone do Bambu Studio Teste.exe e referência Microsoft.CSharp no compilador do Windows.
+Script V4:
+https://github.com/contatonovadesign2025-glitch/bambu-studio-download/blob/main/BAMBU_STUDIO_059_GERAR_INSTALADOR_COM_ATALHO_V4.cmd
+Prevê criar no Windows:
+Instalar_BAMBU_STUDIO_059_PARKOUR_P3_V4_COM_ATALHO.exe
+ATENÇÃO: V4 FOI PUBLICADA E INSPECIONADA NO CÓDIGO, MAS O USUÁRIO AINDA NÃO CONFIRMOU SUA COMPILAÇÃO/INSTALAÇÃO COM SUCESSO. NÃO afirmar que V4 está aprovada.
+O usuário NÃO quer ter que executar novos geradores em cada etapa; ideal é entregar a pasta completa ZIP com tudo integrado e o gerador de instalador DENTRO do pacote, conforme exemplo antigo.
+
+========================================================
+CLOUDFLARE, DOWNLOAD E ATUALIZAÇÃO DE CLIENTES
+========================================================
+O usuário perguntou como estavam estas atualizações em relação ao Cloudflare.
+Foi feita inspeção do código do gerador V4 no GitHub. Ele NÃO possui ações de deploy no Cloudflare (sem wrangler, Workers, Pages, D1, upload ou updater remoto); NÃO foi realizado deploy.
+As correções de plugin/motor e de ícones são LOCAIS; clientes já instalados NÃO recebem atualização automaticamente apenas porque novo .exe foi gerado.
+Ainda falta DEFINIR e implementar eventual mecanismo de atualização de versões: hospedar pacote e manifesto com versão, checagem no aplicativo, download seguro, backup, aplicação sem estragar instalações existentes, e publicar via Cloudflare. O usuário ainda NÃO confirmou explicitamente se quer atualização automática silenciosa ou apenas atualização oferecida.
+NÃO alterar banco D1, licenças ou pagamentos sem pedido e planejamento claro.
+
+========================================================
+ESTADO ATUAL E PRÓXIMOS PASSOS
+========================================================
+1. Preservar a pasta funcional BAMBU_STUDIO_059_RC10_GULIVE_MOTOR_CORRIGIDO.
+2. Preservar os ZIPs enviados: exemplo do formato antigo e base corrigida.
+3. Se necessário, conferir estrutura real dos ZIPs (não presumir conteúdo sem lê-los).
+4. Entregar de preferência um único ZIP da PASTA COMPLETA com motor Paradise 3 já integrado e gerador instalador DENTRO, respeitando formato antigo do usuário.
+5. Corrigir e TESTAR instalador para clientes: ícone de Desktop, menu Iniciar, instalação/desinstalação e abertura após instalação; preferir instalar em pasta estável e não sobrescrever mundos/progresso.
+6. Testar checkpoints, funcionamento dos eventos TikTok e estabilidade da versão.
+7. Só depois considerar atualizações Cloudflare, distinguindo publicação de atualização real dos clientes.
+8. Não anunciar como concluído algo sem teste ou sem artefato realmente criado. Não prometer arquivo sandbox se ambiente falhar.
+
+COMUNICAÇÃO COM O USUÁRIO:
+Responder sempre em português brasileiro. Ser objetivo e assumir erros sem repetir desculpas. O usuário já gastou bastante tempo com gerações inconsistentes. Evitar pedir os mesmos arquivos de novo e evitar explicar o procedimento antigo como se fosse novidade. Ele prefere receber a pasta pronta e poder mandar instalador confiável para seus clientes.
+
+FIM DA LEMBRANÇA.

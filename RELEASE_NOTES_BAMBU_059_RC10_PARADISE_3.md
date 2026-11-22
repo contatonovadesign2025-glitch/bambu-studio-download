@@ -1,51 +1,41 @@
-# BAMBU STUDIO 0.5.9 RC10 — Parkour Paradise 3
+# Histórico técnico da 0.5.9 RC10 / Paradise 3
 
-**Estado: preparação de release. NÃO publicada nem aprovada para distribuição.**
+> **Documento histórico da etapa RC10. NÃO é a release final do produto.**
 
-> Não confundir com a release já publicada BAMBU Cloud Studio 3.0.3. Não substituir seu instalador.
+## Nova base de publicação (22/11/2026)
 
-## O que foi confirmado no aplicativo funcional
+O usuário forneceu o arquivo `BAMBU_STUDIO_0_5_9_SEMIFINAL_GERADOR_GRATUITO_NSIS (2).zip` como a base final de trabalho, com **gerador NSIS**. O nome público deverá ser **BAMBU STUDIO 0.5.9**, sem **SEMIFINAL**.
 
-- Motor do BAMBU STUDIO 0.5.9 RC10 preservado com o plugin GULIVE do Parkour Paradise 3.
-- Correção que funcionou: [V6.1 — Paradise 3](BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd).
-- O Minecraft apresentou as três perguntas SIM/NÃO em `/tparkour configurar` e exibiu **Configuração salva!**.
-- Configuração observada: **Escudo LIGADO**, **Teto LIGADO**, **Nível negativo DESLIGADO**.
-- HUD de tempo e nível exibido nas capturas finais.
-- SHA-256 do JAR Paradise 3: `201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF`.
+**Não foi possível ainda auditar o conteúdo interno do ZIP nem validar compilação/instalação.** Portanto, nenhum arquivo EXE da nova base foi publicado em Releases ou no Cloudflare.
 
-## Instalador Windows candidato à distribuição
+Nome sugerido para uma nova release somente após validação: `BAMBU STUDIO 0.5.9`, tag `v0.5.9`.
 
-Gerador: [V4 com atalhos](BAMBU_STUDIO_059_GERAR_INSTALADOR_COM_ATALHO_V4.cmd).
+O gerador V4 antigo, que criava um EXE distinto, foi removido da branch principal por ter sido substituído pela base NSIS. Recuperável pelo histórico Git.
 
-Nome de saída esperado no Windows: `Instalar_BAMBU_STUDIO_059_PARKOUR_P3_V4_COM_ATALHO.exe`.
+## Correções confirmadas anteriormente
 
-A V4 foi escrita para criar atalhos na Área de Trabalho visível (inclusive OneDrive) e no menu Iniciar.
-**Não existe confirmação de instalação bem-sucedida da V4.** O gerador V3 foi executado e produziu um EXE de aproximadamente 293,9 MB, mas o instalador V3 não criava atalhos. NÃO distribuir V3 como versão final.
+- A correção do motor `BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd` funcionou no Windows do desenvolvedor.
+- O Minecraft mostrou as três perguntas SIM/NÃO em `/tparkour configurar` e `Configuração salva!`.
+- Escudo ligado, teto ligado e nível negativo desligado no teste mostrado; HUD presente.
+- SHA-256 do JAR testado de Paradise 3: `201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF`.
+- **Não presumir** que o ZIP NSIS mais recente contenha os mesmos arquivos sem conferir seu conteúdo.
 
-**O EXE V4 não está anexado ao repositório nem a uma release** e seu SHA-256 precisa ser calculado a partir do próprio arquivo real.
+## Checklist para o novo instalador NSIS (ainda pendente)
 
-## Checklist para publicação
+- [ ] Inventariar o ZIP NSIS recebido, especialmente `resources`, motor, scripts, plugin, mapa, binários e dependências.
+- [ ] Conferir a configuração NSIS, caminhos de origem e saída, atalhos, desinstalador e inclusão integral do executável e recursos.
+- [ ] Remover `SEMIFINAL` do nome de produto, nome do EXE e rotulagem do gerador/saída, preservando a versão `0.5.9`.
+- [ ] Gerar o instalador NSIS e testá-lo numa máquina Windows limpa, sem arquivos já existentes do desenvolvedor.
+- [ ] Verificar aplicativo, mapa, servidor, RCON, eventos e licenciamento sem alterar o banco D1.
+- [ ] Calcular SHA-256 do EXE efetivamente distribuído.
+- [ ] Publicar esse EXE em uma **nova release 0.5.9** no GitHub e conferir seu download real.
+- [ ] Somente depois atualizar o link de download/manifesto no Cloudflare.
 
-- [ ] Gerar a V4 no computador com o motor funcional.
-- [ ] Conferir nome, tamanho e SHA-256 do instalador EXE.
-- [ ] Testar em outro computador/perfil sem o GULIVE instalado.
-- [ ] Confirmar ícones na Área de Trabalho visível e no menu Iniciar.
-- [ ] Abrir o app pelo ícone e usar o botão **Preparar e iniciar servidor**.
-- [ ] Confirmar Paradise 3, `/tparkour configurar`, persistência e inicialização.
-- [ ] Testar checkpoints, progressão, eventos TikTok, RCON e dados do usuário.
-- [ ] Validar reinstalação e eventuais licenças, sem modificar o banco Cloudflare D1.
-- [ ] Publicar uma **release separada** e anexar o EXE validado, não só o CMD.
-- [ ] Atualizar o link público e o Cloudflare somente após validação.
+## Releases anteriores — não confundir
 
-## Identificação sugerida da release FUTURA (não publicada)
+- `v3.0.3-3f159e15e445` = BAMBU Cloud Studio 3.0.3 (`Instalar-BAMBU-Cloud-3.0.3.exe`).
+- `v2.0.0` = BAMBU Studio 2.0 (`Instalar-BAMBU-2.0.0.exe`).
 
-- Tag: `v0.5.9-rc10-p3`.
-- Título: `BAMBU STUDIO 0.5.9 RC10 — Parkour Paradise 3`.
-- Asset previsto: `Instalar_BAMBU_STUDIO_059_PARKOUR_P3_V4_COM_ATALHO.exe` (somente se validado).
-- Publicar SHA-256 do EXE real e manter os releases já publicados `v3.0.3-3f159e15e445` (BAMBU Cloud Studio) e `v2.0.0` (BAMBU Studio 2.0).
+Os executáveis dessas releases pertencem a outros pacotes e **não devem ser apresentados como instalador final do BAMBU STUDIO 0.5.9**.
 
-## Cloudflare e atualização
-
-Os geradores locais não fazem deploy e não implementam atualização automática dos clientes.
-Manifesto remoto, download versionado e integração do aplicativo/Cloudflare ainda são pendências.
-Nenhum deploy, alteração de licenças/D1 ou substituição de asset de release foi realizado ao preparar esta documentação.
+**Estado:** notas e índice GitHub atualizados. Binário final NSIS, publicação em Releases e deploy Cloudflare ainda pendentes.

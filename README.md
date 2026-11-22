@@ -1,54 +1,42 @@
-# BAMBU STUDIO — Downloads, versões e continuidade
+# BAMBU STUDIO 0.5.9 — distribuição para Windows
 
-Este repositório contém **scripts de manutenção do BAMBU STUDIO** e também mantém releases históricas de aplicativos BAMBU. **Não misture instaladores de produtos/versões diferentes**.
+## Estado atual (22/11/2026)
 
-## Releases publicadas no GitHub
+**NOVA BASE FINAL DO DESENVOLVEDOR:** `BAMBU_STUDIO_0_5_9_SEMIFINAL_GERADOR_GRATUITO_NSIS (2).zip` (arquivo fornecido na conversa).
 
-| Release | Produto | Instalador anexado | Estado |
-| --- | --- | --- | --- |
-| [v3.0.3-3f159e15e445](https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v3.0.3-3f159e15e445) | **BAMBU Cloud Studio 3.0.3** | `Instalar-BAMBU-Cloud-3.0.3.exe` | Publicada anteriormente; **não é o instalador da RC10** |
-| [v2.0.0](https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v2.0.0) | **BAMBU Studio 2.0** | `Instalar-BAMBU-2.0.0.exe` | Publicada anteriormente; **não é o instalador da RC10** |
-| [0.5.9 RC10 — Paradise 3](RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md) | **BAMBU STUDIO 0.5.9 RC10** | **Não anexado** | **Candidata; aguardando EXE V4 validado** |
+**Nome comercial solicitado:** `BAMBU STUDIO 0.5.9`, sem a palavra **SEMIFINAL** na interface, no instalador, nos caminhos de saída e na release.
 
-**Importante:** o item RC10 na tabela é apenas documentação de preparação, **não é uma release do GitHub publicada**. Não anunciar aos clientes que já existe um instalador RC10 neste repositório.
+**IMPORTANTE: o conteúdo interno desse ZIP ainda NÃO foi auditado ou compilado aqui.** NÃO presumir que o programa, dependências e gerador NSIS estejam corretos apenas pelo nome do arquivo. A publicação do instalador final está pendente de verificação dos arquivos reais e de testes em máquina limpa.
 
-## Arquivos mantidos após a limpeza
+## Releases atualmente existentes
 
-- **[BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd](BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd)** — correção de motor/plug-in **testada funcionando** no computador do desenvolvedor.
-- **[BAMBU_STUDIO_059_GERAR_INSTALADOR_COM_ATALHO_V4.cmd](BAMBU_STUDIO_059_GERAR_INSTALADOR_COM_ATALHO_V4.cmd)** — gerador **mais recente**, escrito para criar atalho na Área de Trabalho visível e no menu Iniciar. **Ainda não aprovado por teste real de instalação**.
-- **[RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md](RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md)** — notas da próxima release e checklist de qualidade.
-- **[LEMBRANCA_CONVERSA_BAMBU_STUDIO_PARADISE_3_2026-11-22.txt](LEMBRANCA_CONVERSA_BAMBU_STUDIO_PARADISE_3_2026-11-22.txt)** — histórico técnico do projeto.
-- **README.md** — este índice.
+| Release | Instalador | Pertence à nova base 0.5.9 NSIS? |
+| --- | --- | --- |
+| [BAMBU Cloud Studio 3.0.3](https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v3.0.3-3f159e15e445) | `Instalar-BAMBU-Cloud-3.0.3.exe` | **NÃO** |
+| [BAMBU Studio 2.0](https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v2.0.0) | `Instalar-BAMBU-2.0.0.exe` | **NÃO** |
 
-## BAMBU STUDIO 0.5.9 RC10 / Paradise 3
+**Ainda não há uma release publicada do BAMBU STUDIO 0.5.9 gerado pelo projeto NSIS recebido.** O arquivo correto deverá ser anexado em uma nova release, somente depois dos testes. Não reutilizar a release Cloud Studio para o produto 0.5.9.
 
-Base funcional no Windows do desenvolvedor: `Downloads\BAMBU_STUDIO_059_RC10_GULIVE_MOTOR_CORRIGIDO`.
+## Fluxo correto para clientes
 
-O plugin correto do mapa **Parkour Paradise 3** tem SHA-256:
+1. Conferir o ZIP NSIS recebido: programa principal, `resources`, Electron, módulo do motor, mapa/servidor e dependências exigidas, gerador NSIS, caminhos relativos, atalhos, desinstalador e arquivos de licença **sem incluir segredos**.
+2. Remover `SEMIFINAL` do nome do aplicativo, do instalador, da saída e da identificação exibida na instalação; manter a versão **0.5.9**.
+3. Gerar **um instalador EXE completo** e instalar num Windows limpo, sem depender de outras pastas do computador do desenvolvedor.
+4. Testar abrir pelo atalho da Área de Trabalho e menu Iniciar, executar servidor/mapa e verificar integração, dados do usuário e desinstalação.
+5. Calcular tamanho e SHA-256 do EXE final.
+6. Criar nova GitHub Release **BAMBU STUDIO 0.5.9** (tag sugerida `v0.5.9`) com o instalador EXE validado como asset. O executável distribuível fica nos arquivos da Release, não misturado a scripts experimentais na branch `main`.
+7. Só então alterar links públicos e o download no Cloudflare para essa release correta. Nunca apontar o site para instalador que não foi testado.
 
-`201656BC3CB0462D96BB6E1FDCAEA62417D704168CD3B051CF8C0F3CF1A1F8FF`
+## Artefatos técnicos mantidos temporariamente
 
-**Funcionalidade confirmada:** carregamento do plugin, HUD e `/tparkour configurar` com as três perguntas SIM/NÃO; a configuração foi salva. **Pendente:** testes completos de checkpoints, 100 níveis e eventos TikTok.
+- [Correção validada do motor Paradise 3 (V6.1)](BAMBU_059_PARKOUR_PARADISE_3_V6_1_CORRIGIDO.cmd): histórico de recuperação; não executar no novo projeto NSIS sem verificar compatibilidade.
+- [Notas técnicas da RC10/Paradise 3](RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md): histórico e testes anteriores; não equivale à release final NSIS.
+- [Lembrança/continuidade](LEMBRANCA_CONVERSA_BAMBU_STUDIO_PARADISE_3_2026-11-22.txt): dados de correções já realizadas.
 
-O gerador V3 produziu um EXE local de cerca de 293,9 MB, mas ele **não criou atalhos**. A V4 corrige o código desses atalhos, porém **não temos o arquivo V4 compilado/testado no GitHub**. O EXE esperado é:
+Os geradores antigos substituídos foram removidos da branch principal e permanecem recuperáveis pelo histórico Git. **Não publicar V3/V4 como instaladores finais**: o novo ZIP NSIS é a referência atual.
 
-`Instalar_BAMBU_STUDIO_059_PARKOUR_P3_V4_COM_ATALHO.exe`
+## Cloudflare
 
-**Não publique o V3 em lugar da V4 e não vincule o script CMD como se fosse instalador para clientes.**
+**Deploy ainda não realizado.** O repositório não contém um mecanismo de distribuição/atualização automática pronto e não há um canal Cloudflare de escrita conectado nesta conversa. Atualizar o banco D1, as licenças, as credenciais ou os dados do usuário **não faz parte** da simples atualização do instalador.
 
-## Publicação segura da próxima versão
-
-1. Gerar a V4 a partir da base funcional e testar a instalação em outro perfil/computador.
-2. Conferir criação dos atalhos, início do BAMBU, servidor e integração do Paradise 3.
-3. Calcular SHA-256 do EXE final e registrar na release.
-4. Publicar uma **nova release própria** da 0.5.9 RC10 (`v0.5.9-rc10-p3` é uma sugestão), anexando o EXE validado.
-5. Manter os instaladores antigos do Cloud Studio 3.0.3 e BAMBU Studio 2.0 em suas releases originais.
-6. Atualizar downloads no site e implementar eventual mecanismo de atualização automática Cloudflare separadamente.
-
-## Cloudflare / licenças
-
-Os scripts deste repositório **não fazem deploy no Cloudflare** e não atualizam automaticamente aplicativos já instalados. Qualquer migração de Worker, D1, licenças ou atualizador remoto exige desenvolvimento e validação próprios. **Nenhuma alteração de licenças, banco D1 ou Cloudflare foi feita nesta atualização de documentação.**
-
-## Histórico
-
-Em 22/11/2026 foram removidos da branch `main` 12 scripts experimentais, duplicados ou substituídos. Eles permanecem disponíveis no histórico Git. Essa limpeza não modificou arquivos instalados no computador.
+Depois que houver URL pública e hash do EXE validado, verificar Worker/site e atualizar somente a configuração necessária de download, sem alterar licenças e registros existentes.

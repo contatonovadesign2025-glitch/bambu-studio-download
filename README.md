@@ -6,8 +6,8 @@ Este repositório contém **scripts de manutenção do BAMBU STUDIO** e também 
 
 | Release | Produto | Instalador anexado | Estado |
 | --- | --- | --- | --- |
-| [v3.0.3-3f159e15e445](../../releases/tag/v3.0.3-3f159e15e445) | **BAMBU Cloud Studio 3.0.3** | `Instalar-BAMBU-Cloud-3.0.3.exe` | Publicada anteriormente; **não é o instalador da RC10** |
-| [v2.0.0](../../releases/tag/v2.0.0) | **BAMBU Studio 2.0** | `Instalar-BAMBU-2.0.0.exe` | Publicada anteriormente; **não é o instalador da RC10** |
+| [v3.0.3-3f159e15e445](https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v3.0.3-3f159e15e445) | **BAMBU Cloud Studio 3.0.3** | `Instalar-BAMBU-Cloud-3.0.3.exe` | Publicada anteriormente; **não é o instalador da RC10** |
+| [v2.0.0](https://github.com/contatonovadesign2025-glitch/bambu-studio-download/releases/tag/v2.0.0) | **BAMBU Studio 2.0** | `Instalar-BAMBU-2.0.0.exe` | Publicada anteriormente; **não é o instalador da RC10** |
 | [0.5.9 RC10 — Paradise 3](RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md) | **BAMBU STUDIO 0.5.9 RC10** | **Não anexado** | **Candidata; aguardando EXE V4 validado** |
 
 **Importante:** o item RC10 na tabela é apenas documentação de preparação, **não é uma release do GitHub publicada**. Não anunciar aos clientes que já existe um instalador RC10 neste repositório.

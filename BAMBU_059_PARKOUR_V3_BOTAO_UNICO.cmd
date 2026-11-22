@@ -111,7 +111,7 @@ function Install {
         Copy-Item -LiteralPath $manifest -Destination $prior
     }
     $data=[pscustomobject]@{date=(Get-Date).ToString('s');GuliveHash=$h;records=@($records.ToArray())}
-    [IO.File]::WriteAllText($manifest,($data | ConvertTo-Json -Depth 6),(New-Object Text.UTF8Encoding($false)))
+    [IO.File]::WriteAllText($manifest,($data | ConvertTo-Json -Depth 6),([System.Text.UTF8Encoding]::new($false)))
     try{
         foreach($r in $records){
             $tmp=$r.destination+'.v3-temp'

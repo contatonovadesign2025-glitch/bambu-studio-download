@@ -156,7 +156,7 @@ try {
  Say ('  Hash atual do plugin em APPDATA: '+(HashJar $runtime)) 'White'
  Say '[4/6] Listando ZIPs, EXEs e geradores relacionados ao BAMBU...' 'Cyan'
  $archiveRows=New-Object 'System.Collections.Generic.List[object]'
- foreach($base in @($desktop,$downloads) | Sort-Object -Unique){
+ foreach($base in (@($desktop,$downloads) | Sort-Object -Unique)){
   if(-not(ExistsDir $base)){continue}
   try {
    Get-ChildItem -LiteralPath $base -File -Recurse -Force -ErrorAction SilentlyContinue |

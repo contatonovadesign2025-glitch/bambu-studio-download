@@ -142,3 +142,23 @@ README.md e RELEASE_NOTES_BAMBU_059_RC10_PARADISE_3.md detalham status, teste pe
 Cloudflare D1/Workers e licenças continuam INALTERADOS; apenas os arquivos textuais do repositório foram modificados.
 
 FIM DA LEMBRANÇA.
+
+========================================================
+ADENDO FINAL — NOVA BASE NSIS / OBJETIVO DE DISTRIBUIÇÃO
+========================================================
+
+O usuário enviou `BAMBU_STUDIO_0_5_9_SEMIFINAL_GERADOR_GRATUITO_NSIS (2).zip` como a NOVA BASE FINAL do BAMBU STUDIO. Tamanho do ZIP anexo: 212.168.156 bytes (~202,3 MiB). Esta base substitui o candidato anterior V4 como referência para futuras instalações.
+O nome oficial solicitado passa a ser apenas `BAMBU STUDIO 0.5.9` — eliminar a palavra SEMIFINAL do nome interno/instalador/pasta de saída/identidade de release, preservando a versão 0.5.9.
+O usuário quer inspecionar cuidadosamente integridade do pacote: executável, dependências Electron, Node, engine, Minecraft, plugins, mundo, RCON, licenças (não segredos), scripts NSIS, atalhos e desinstalação. Somente depois publicar um instalador único completo para clientes.
+
+O repositório GitHub usado é `contatonovadesign2025-glitch/bambu-studio-download`.
+As Releases públicas existentes são de outros produtos/versões: BAMBU Cloud Studio 3.0.3 e BAMBU Studio 2.0, com instaladores de ~84MB. Não correspondem à base NSIS final 0.5.9.
+O arquivo ZIP NSIS é maior que o limite de 100MB do Git para arquivo individual; para distribuição usar o instalador em GitHub Releases (asset) ou Cloudflare R2 após validação, não commitar ZIP/EXE grande na branch main.
+Na conexão GitHub disponível houve acesso de leitura às Releases e escrita em arquivos de texto da branch, mas não foram disponibilizadas ações para criar/editar Releases e enviar seus assets binários.
+Nenhuma ferramenta conectada com escrita no Cloudflare foi disponibilizada nesta conversa. Não alterar D1/Workers, nem anunciar deploy realizado.
+
+Em 22/11/2026, o README foi atualizado para BAMBU STUDIO 0.5.9 sem SEMIFINAL, com checklist de auditoria e releases separadas. Foram atualizadas as notas técnicas históricas. O gerador V4 antigo foi removido da branch main por ter sido substituído pela nova base NSIS, mas permanece no histórico.
+
+A tentativa de abrir programaticamente o ZIP de 212MB no runtime falhou devido a erro de ferramenta `ClientError`. O ZIP foi recebido e identificado, mas o conteúdo interno NÃO foi auditado. Não afirmar que o instalador contém todas as dependências ou que uma nova release foi publicada até haver verificação real.
+
+RETOMADA: primeiro inspecionar a nova base NSIS, renomear SEMIFINAL -> BAMBU STUDIO 0.5.9, validar todos os recursos, gerar EXE confiável, publicar nova release própria e só depois apontar Cloudflare para essa release, mantendo licenças e D1.
